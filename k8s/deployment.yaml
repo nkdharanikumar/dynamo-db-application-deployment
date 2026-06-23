@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-api
+  namespace: customer-app
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: customer-api
+
+  template:
+    metadata:
+      labels:
+        app: customer-api
+
+    spec:
+      serviceAccountName: customer-api-sa
+
+      containers:
+      - name: customer-api
+
+        image: <IMAHGE_REPO>/customer-api:latest
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 5000
